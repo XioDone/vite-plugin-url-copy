@@ -8,6 +8,7 @@ export default defineConfig({
       custom: '',
       debug: false,
       disabled: false,
+      qrcode: true,
     }),
   ],
   server: {

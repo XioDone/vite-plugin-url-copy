@@ -3,7 +3,7 @@ vite-plugin-url-copy
 </h1>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/vite-plugin-url-copy"><img src="https://img.shields.io/npm/v/vite-plugin-url-copy.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Version"></a>
+<a href="https://www.npmjs.com/package/vite-plugin-url-copy" target="_blank"><img src="https://img.shields.io/npm/v/vite-plugin-url-copy.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Version"></a>
 </p>
 
 <p align="center">⚡️ Auto copy the vite server url when dev or preview</p>
@@ -43,9 +43,11 @@ ServerUrlCopy({
   mode: 'local',
   // Custom any string to copy when the server start, It will overwrite the server URL.
   custom: '',
-  // Disabled copy, default false
-  debug: false,
+  // Generate network QR code, default false
+  qrcode: false,
   // Log config info, default false
+  debug: false,
+  // Disable plugin, default false
   disabled: false,
 })
 ```

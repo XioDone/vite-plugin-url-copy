@@ -1,6 +1,6 @@
 export interface Options {
   /**
-   * Disabled copy.
+   * Disable plugin.
    * @default false
    */
   disabled?: boolean
@@ -12,6 +12,11 @@ export interface Options {
    * Custom any string to copy.
    */
   custom?: string
+  /**
+   * Generate QR Code
+   * @default false
+   */
+  qrcode?: boolean
   /**
    * Log config info
    */
