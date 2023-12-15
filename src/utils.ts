@@ -48,6 +48,7 @@ interface PrevConfig {
   port?: number
   mode?: 'local' | 'network'
   qrcode?: boolean
+  custom?: string
 }
 
 interface Config extends Options {
@@ -58,6 +59,7 @@ const prevConfig: PrevConfig = {
   port: undefined,
   mode: undefined,
   qrcode: undefined,
+  custom: undefined,
 }
 
 export const $diffConfigChange = (config: Config) => {
