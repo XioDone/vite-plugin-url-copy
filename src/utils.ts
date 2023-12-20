@@ -1,8 +1,13 @@
+import type { PreviewServer, ResolvedServerUrls, ViteDevServer } from 'vite'
 import type { Options } from './types'
 
 export const log = console.log
 
-export const $sleep = (ms = 0) => {
+export function isObject(value: unknown): value is Record<string, any> {
+  return Object.prototype.toString.call(value) === '[object Object]'
+}
+
+export function $sleep(ms = 0) {
   return new Promise<void>(resolve => {
     setTimeout(() => {
       resolve()
@@ -16,7 +21,7 @@ type Fn<T> = () => T | Promise<T>
  * @param {Fn<T>} fn - callback function
  * @returns {Promise<T>}
  */
-export const $catch = async <T>(fn: Fn<T>): Promise<T> => {
+export async function $catch<T>(fn: Fn<T>): Promise<T> {
   try {
     return await fn()
   } catch (error) {
@@ -32,7 +37,7 @@ interface usePromiseStateReturn<T> {
   reject: Reject
 }
 
-export const $promiseState = <T>(): usePromiseStateReturn<T> => {
+export function $promiseState<T>(): usePromiseStateReturn<T> {
   let delegator: { resolve: Resolve<T>, reject: Reject } | undefined
   const promise = new Promise<T>((resolve, reject) => {
     delegator = { resolve, reject }
@@ -44,34 +49,48 @@ export const $promiseState = <T>(): usePromiseStateReturn<T> => {
   return { promise, ...delegator }
 }
 
-interface PrevConfig {
-  port?: number
-  mode?: 'local' | 'network'
-  qrcode?: boolean
-  custom?: string
-}
-
 interface Config extends Options {
   port?: number
 }
 
-const prevConfig: PrevConfig = {
-  port: undefined,
-  mode: undefined,
-  qrcode: undefined,
-  custom: undefined,
+let prevConfig: Config = {}
+export function $diffConfigChange(config: Config) {
+  let hasChange = false
+  function diff(curr: any, prev: any): boolean {
+    for (const prop of Object.keys(curr)) {
+      if (isObject(curr[prop])) {
+        const hasDiff = diff(curr[prop], prev[prop])
+        if (hasDiff) {
+          return hasDiff
+        }
+      } else if (curr[prop] !== prev[prop]) {
+        hasChange = true
+        return hasChange
+      }
+    }
+    return hasChange
+  }
+  diff(config, prevConfig)
+
+  if (hasChange) {
+    prevConfig = config
+  }
+
+  return hasChange
 }
 
-export const $diffConfigChange = (config: Config) => {
-  let hasChange = false
-
-  type Prop = keyof PrevConfig
-  for (const prop of Object.keys(prevConfig)) {
-    const _prop = prop as Prop
-    if (prevConfig[_prop] !== config[_prop]) {
-      hasChange = true
-      prevConfig[_prop] = config[_prop] as any
-    }
+const tryTimes = 10
+let counter = 0
+export async function getUrls(server: ViteDevServer | PreviewServer) {
+  const urls = server.resolvedUrls
+  if (counter >= tryTimes) {
+    throw new Error('timeout')
   }
-  return hasChange
+  if (!urls) {
+    counter++
+    await $sleep()
+    return getUrls(server)
+  }
+  counter = 0
+  return urls
 }
