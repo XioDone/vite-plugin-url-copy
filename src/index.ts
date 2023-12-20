@@ -1,40 +1,40 @@
 import type { Plugin } from 'vite'
-import { copyWrite } from './core'
 import type { Options } from './types'
-import { $catch, $diffConfigChange, log } from './utils'
+import { $catch, $diffConfigChange, getUrls, log } from './utils'
+import { onCopyWrite, onQRCode, resolveOptions } from './core'
 
 export * from './types'
 
-export default function VitePluginServerUrl(options: Options = {}): Plugin {
+export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
+  const options = resolveOptions(rawOptions)
+
   return {
     name: 'server-url-copy',
-
     configureServer(server) {
       if (options.disabled) {
         return
       }
 
       const _listen = server.listen
-
-      server.listen = function (...args) {
+      const _server = server
+      _server.listen = function (...args) {
         const [_port, isRestart] = args
 
         return $catch(async () => {
-          const _server = await _listen.apply(this, args)
+          const server = await _listen.apply(this, args)
+          const urls = await getUrls(server)
 
-          $catch(() => {
-            const port = _server.config.server.port
+          $catch(async () => {
+            const port = server.config.server.port
             const hasChange = $diffConfigChange({ port, ...options })
             if (isRestart && !hasChange) {
               return
             }
-            copyWrite(_server, options)
+            await onCopyWrite(urls, options)
+            onQRCode(urls, options)
           })
 
-          return _server
-        }).catch(err => {
-          console.log(err)
-          throw err
+          return server
         })
       }
     },
@@ -44,7 +44,11 @@ export default function VitePluginServerUrl(options: Options = {}): Plugin {
       }
 
       server.httpServer.once('listening', () => {
-        copyWrite(server, options)
+        $catch(async () => {
+          const urls = await getUrls(server)
+          await onCopyWrite(urls, options)
+          onQRCode(urls, options)
+        })
       })
     },
   }
