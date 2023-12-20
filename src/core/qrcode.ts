@@ -5,6 +5,7 @@ import { colorize } from 'consola/utils'
 import { NETWORK } from '../constants'
 import { log } from '../utils'
 import type { ResolveOptions } from '../types'
+import { debugPush } from './debug'
 
 export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
   const { custom, disabled } = options.qrcode
@@ -14,18 +15,29 @@ export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
     return
   }
 
-  if (debug) {
-    log(options.qrcode)
+  let result = ''
+  let hasCustom = false
+  if (typeof custom === 'string' && custom) {
+    hasCustom = true
+    result = custom
   }
 
-  const url = custom || urls[NETWORK][0]
+  result ||= urls[NETWORK][0]
+  const computedMode = hasCustom ? 'cutsom' : NETWORK
 
-  if (!url) {
+  if (debug) {
+    debugPush(() => {
+      log(colorize('yellow', `qrcode: ${computedMode} - ${result} \n`))
+      log(colorize('yellow', `qrcode: ${JSON.stringify(options.qrcode)} \n`))
+    })
+  }
+
+  if (!result) {
     consola.warn('url-copy: QR-Code uses a network URL, Please check your vite configuration.')
     return
   }
 
-  const data = generateQRCode(url)
+  const data = generateQRCode(result)
   let qrcodeData = ''
 
   try {
@@ -48,7 +60,7 @@ export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
     qrcodeData = data
   }
 
-  log(colorize('green', '\n  ✔ '), colorize('bgGreen', ` ·QRCode· of the ${NETWORK} - ${url} `), '\n')
+  log(colorize('green', '\n  ✔ '), colorize('bgGreen', ` ·QRCode· of the ${NETWORK} - ${result} `), '\n')
   log(colorize('green', qrcodeData))
 }
 

@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import type { Options } from './types'
 import { $catch, $diffConfigChange, getUrls, log } from './utils'
-import { onCopyWrite, onQRCode, resolveOptions } from './core'
+import { debugOutput, onCopyWrite, onQRCode, resolveOptions } from './core'
 
 export * from './types'
 
@@ -32,6 +32,7 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
             }
             await onCopyWrite(urls, options)
             onQRCode(urls, options)
+            debugOutput()
           })
 
           return server
@@ -48,6 +49,7 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
           const urls = await getUrls(server)
           await onCopyWrite(urls, options)
           onQRCode(urls, options)
+          debugOutput()
         })
       })
     },

@@ -4,6 +4,7 @@ import { colorize } from 'consola/utils'
 import type { ResolvedServerUrls } from 'vite'
 import type { ResolveOptions } from '../types'
 import { $catch, $sleep, log } from '../utils'
+import { debugPush } from './debug'
 
 export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) => {
   const { custom, mode, disabled } = options.copy
@@ -29,8 +30,10 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
     const computedMode = hasCustom ? 'cutsom' : mode
 
     if (debug) {
-      log(colorize('bgYellow', '\n  url-copy_debug: '), colorize('yellow', ` ${computedMode} - ${result} \n`))
-      log(colorize('yellow', ` ${JSON.stringify(options.copy)} \n`))
+      debugPush(() => {
+        log(colorize('yellow', `copy: ${computedMode} - ${result} \n`))
+        log(colorize('yellow', `copy: ${JSON.stringify(options.copy)} \n`))
+      })
     }
 
     if (!result) {
