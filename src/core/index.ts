@@ -1,2 +1,3 @@
-export { copyWrite } from './copy'
-export { generateQRCode } from './qrcode'
+export * from './copy'
+export * from './qrcode'
+export * from './options'

@@ -1,24 +1,36 @@
-export interface Options {
-  /**
-   * Disable plugin.
-   * @default false
-   */
+type DeepRequired<T> = {
+  [P in keyof T]-?: DeepRequired<T[P]>
+}
+
+interface CopyOptions {
   disabled?: boolean
   /**
    * @default 'local'
    */
   mode?: 'local' | 'network'
   /**
-   * Custom any string to copy.
+   * Custom any string.
+   */
+  custom?: string | undefined
+}
+
+interface QRCodeOptions {
+  disabled?: boolean
+  /**
+   * Custom any string.
    */
   custom?: string
+}
+
+export interface Options {
   /**
-   * Generate QR Code
-   * @default false
+   * @default 'local'
+   * Disable plugin.
    */
-  qrcode?: boolean
-  /**
-   * Log config info
-   */
+  copy?: CopyOptions
+  qrcode?: QRCodeOptions
+  disabled?: boolean
   debug?: boolean
 }
+
+export type ResolveOptions = DeepRequired<Options>
