@@ -1,37 +1,16 @@
 import { consola } from 'consola'
 import clipboard from 'clipboardy'
 import { colorize } from 'consola/utils'
-import type { PreviewServer, ResolvedServerUrls, ViteDevServer } from 'vite'
-import type { Options } from '../types'
+import type { ResolvedServerUrls } from 'vite'
+import type { ResolveOptions } from '../types'
 import { $catch, $sleep, log } from '../utils'
-import { generateQRCode } from './qrcode'
 
-const NETWORK = 'network'
+export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) => {
+  const { custom, mode, disabled } = options.copy
+  const debug = options.debug
 
-export const copyWrite = (server: ViteDevServer | PreviewServer, options: Options) => {
-  const { custom = '', debug = false, mode: _mode = 'local', qrcode = false } = options
-  let mode = '' as typeof _mode
-  if (_mode !== 'local' && _mode !== 'network') {
-    mode = 'local'
-  } else {
-    mode = _mode
-  }
-
-  const tryTimes = 10
-  let counter = 0
-
-  async function getUrls() {
-    const urls = server.resolvedUrls
-    if (counter >= tryTimes) {
-      throw new Error('timeout')
-    }
-    if (!urls) {
-      counter++
-      await $sleep()
-      return getUrls()
-    }
-
-    return urls
+  if (disabled) {
+    return
   }
 
   return $catch(async () => {
@@ -42,8 +21,7 @@ export const copyWrite = (server: ViteDevServer | PreviewServer, options: Option
       result = custom
     }
 
-    const urls = await getUrls()
-
+    // const urls = await getUrls()
     if (!result) {
       result = urls[mode][0]
     }
@@ -51,14 +29,14 @@ export const copyWrite = (server: ViteDevServer | PreviewServer, options: Option
     const computedMode = hasCustom ? 'cutsom' : mode
 
     if (debug) {
-      log(colorize('bgYellow', '\n  Url-copy_debug: '), colorize('yellow', ` ${computedMode} - ${result} \n`))
-      log(colorize('yellow', ` ${JSON.stringify(options)} \n`))
+      log(colorize('bgYellow', '\n  url-copy_debug: '), colorize('yellow', ` ${computedMode} - ${result} \n`))
+      log(colorize('yellow', ` ${JSON.stringify(options.copy)} \n`))
     }
 
     if (!result) {
-      // Lower priority
+      // Lower priority warning
       await $sleep()
-      consola.warn(`Url-copy: ${mode} mode URL is undefined, Please check your vite configuration.`)
+      consola.warn(`url-copy: ${mode} mode URL is undefined, Please check your vite configuration.`)
       return
     }
 
@@ -70,52 +48,8 @@ export const copyWrite = (server: ViteDevServer | PreviewServer, options: Option
       '\n',
     )
 
-    let qrcodeData: string | undefined = ''
-
-    if (qrcode) {
-      qrcodeData = getQRCode(urls)
-    }
-
-    if (qrcode && qrcodeData) {
-      const url = urls[NETWORK][0]
-
-      log(colorize('green', '\n  ✔ '), colorize('bgGreen', ` ·QRCode· of the ${NETWORK} - ${url} `), '\n')
-      log(colorize('green', qrcodeData))
-    }
-
     return result
   }).catch(error => {
-    consola.warn(`Url-copy: ${error}`)
+    consola.warn(`url-copy: ${error}`)
   })
-}
-
-function getQRCode(urls: ResolvedServerUrls) {
-  const url = urls[NETWORK][0]
-
-  if (!url) {
-    consola.warn('Url-copy: QR-Code uses a network URL, Please check your vite configuration.')
-    return
-  }
-
-  const data = generateQRCode(url)
-
-  try {
-    const dataTransformed = [...data]
-      .map((item, index) => {
-        if (!index) {
-          item = `\t${item}`
-        }
-
-        if (item === '\n') {
-          item = `${item}\t`
-        }
-
-        return item
-      })
-      .join('')
-
-    return dataTransformed
-  } catch (error) {
-    return data
-  }
 }
