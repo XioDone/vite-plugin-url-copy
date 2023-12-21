@@ -30,10 +30,10 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
     const computedMode = hasCustom ? 'cutsom' : mode
 
     if (debug) {
-      debugPush(() => {
-        log(colorize('yellow', `copy: ${computedMode} - ${result} \n`))
-        log(colorize('yellow', `copy: ${JSON.stringify(options.copy)} \n`))
-      })
+      debugPush(
+        `copy: ${computedMode} - ${result}`,
+        `copy: ${JSON.stringify(options.copy)}`,
+      )
     }
 
     if (!result) {

@@ -1,18 +1,35 @@
+import consola from 'consola'
 import { colorize } from 'consola/utils'
 import { log } from '../utils'
 
-const debugProcess: Function[] = []
+const debugProcess: string[] = []
 
-export function debugPush(fn: Function) {
-  debugProcess.push(fn)
+export function debugPush(...args: string[]) {
+  debugProcess.push(...args)
 }
 
+const title = colorize('blue', ' vite-plugin-url-copy_debug ')
 export function debugOutput() {
-  log('\n')
-  log(colorize('bgYellow', '  vite-plugin-url-copy_debug:  '), '\n')
-  for (const debugFn of debugProcess) {
-    debugFn && debugFn()
+  const length = debugProcess.length
+  let message = ''
+  for (const [index, debugInfo] of debugProcess.entries()) {
+    message += colorize('blue', debugInfo)
+
+    if (index !== length - 1) {
+      message += '\n\n'
+    }
   }
+
+  log('\n')
+  consola.box({
+    title,
+    message,
+    style: {
+      padding: 1,
+      borderColor: 'gray',
+      borderStyle: 'rounded',
+    },
+  })
 
   debugProcess.length = 0
 }

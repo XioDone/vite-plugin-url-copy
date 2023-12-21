@@ -26,10 +26,10 @@ export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
   const computedMode = hasCustom ? 'cutsom' : NETWORK
 
   if (debug) {
-    debugPush(() => {
-      log(colorize('yellow', `qrcode: ${computedMode} - ${result} \n`))
-      log(colorize('yellow', `qrcode: ${JSON.stringify(options.qrcode)} \n`))
-    })
+    debugPush(
+      `qrcode: ${computedMode} - ${result}`,
+      `qrcode: ${JSON.stringify(options.copy)}`,
+    )
   }
 
   if (!result) {
