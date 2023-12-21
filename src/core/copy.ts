@@ -48,7 +48,6 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
     log(
       colorize('green', '\n  ✔ '),
       colorize('bgGreen', ` ·${computedMode}· already copied to clipboard - ${result} `),
-      '\n',
     )
 
     return result
