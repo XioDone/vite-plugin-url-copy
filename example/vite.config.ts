@@ -4,11 +4,17 @@ import ServerUrlCopy from 'vite-plugin-url-copy'
 export default defineConfig({
   plugins: [
     ServerUrlCopy({
-      mode: 'local',
-      custom: '',
-      debug: false,
+      copy: {
+        mode: 'local',
+        custom: '',
+        disabled: false,
+      },
+      qrcode: {
+        custom: '',
+        disabled: false,
+      },
       disabled: false,
-      qrcode: true,
+      debug: false,
     }),
   ],
   server: {
