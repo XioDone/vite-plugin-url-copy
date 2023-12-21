@@ -7,7 +7,7 @@ const defaultPluginOptions: ResolveOptions = {
     custom: '',
   },
   qrcode: {
-    disabled: false,
+    disabled: true,
     custom: '',
   },
   disabled: false,

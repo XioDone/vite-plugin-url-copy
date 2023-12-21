@@ -23,10 +23,6 @@ interface QRCodeOptions {
 }
 
 export interface Options {
-  /**
-   * @default 'local'
-   * Disable plugin.
-   */
   copy?: CopyOptions
   qrcode?: QRCodeOptions
   disabled?: boolean
