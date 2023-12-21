@@ -9,7 +9,10 @@ export function debugPush(...args: string[]) {
 }
 
 const title = colorize('blue', ' vite-plugin-url-copy_debug ')
-export function debugOutput() {
+export function debugOutput(enabled: boolean) {
+  if (!enabled) {
+    return
+  }
   const length = debugProcess.length
   let message = ''
   for (const [index, debugInfo] of debugProcess.entries()) {

@@ -32,7 +32,7 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
             }
             await onCopyWrite(urls, options)
             onQRCode(urls, options)
-            debugOutput()
+            debugOutput(options.debug)
           })
 
           return server
@@ -49,7 +49,7 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
           const urls = await getUrls(server)
           await onCopyWrite(urls, options)
           onQRCode(urls, options)
-          debugOutput()
+          debugOutput(options.debug)
         })
       })
     },
