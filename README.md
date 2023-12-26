@@ -3,25 +3,34 @@ vite-plugin-url-copy
 </h1>
 
 <p align="center">
+<a href="https://github.com/XioDone/vite-plugin-url-copy" target="_blank"><img alt="Github Badge" src="https://img.shields.io/badge/Star---?logo=github&logoColor=aliceblue&labelColor=18181B&color=61C200"></a> &nbsp
 <a href="https://www.npmjs.com/package/vite-plugin-url-copy" target="_blank"><img src="https://img.shields.io/npm/v/vite-plugin-url-copy.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Version"></a>
 </p>
 
-<p align="center">⚡️ Auto copy the vite server URL & generate a QR code when dev or preview.</p>
+<p align="center">⚡️ Auto copy the Vite server URL and generate a QR code for easy access during dev or preview.</p>
 
 <p align="center"><img src="example/public/preview.png" width="100%"></p>
+
+##### Features
+
+- 🌟 Ready to use, supports dev and preview mode.
+- 💭 Supports copy server URL (local and network types).
+- 📱 Supports generate network URL QR code.
+- 💡 Customizable characters for copy or generate QR code.
+- 😃 Friendly Hot Reload, When the vite server performs a hot restart, the plugin will be reloaded again only after the plugin's configuration or port has changed.
 
 > [!IMPORTANT]
 > Recommended minimum vite version is v4.
 
-## Usage
-
-### Install
+## Install
 
 ```bash
-pnpm i -D vite-plugin-url-copy
+pnpm i vite-plugin-url-copy -D
 ```
 
-Add plugin to your `vite.config.ts`
+## Usage
+
+- Add plugin to your `vite.config.ts`
 
 ```ts
 import ServerUrlCopy from 'vite-plugin-url-copy'
@@ -43,9 +52,19 @@ export default defineConfig({
 ServerUrlCopy({
   // QR code using network URL
   qrcode: {
-    disabled: false
-  }
+    disabled: false,
+  },
 })
+```
+
+- Run
+
+```bash
+pnpm dev
+
+#or
+
+pnpm preview
 ```
 
 ## Configuration
