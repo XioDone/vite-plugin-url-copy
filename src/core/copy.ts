@@ -1,5 +1,4 @@
 import { consola } from 'consola'
-import clipboard from 'clipboardy'
 import { colorize } from 'consola/utils'
 import type { ResolvedServerUrls } from 'vite'
 import type { ResolveOptions } from '../types'
@@ -22,7 +21,6 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
       result = custom
     }
 
-    // const urls = await getUrls()
     if (!result) {
       result = urls[mode][0]
     }
@@ -43,6 +41,7 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
       return
     }
 
+    const clipboard = (await import('clipboardy')).default
     await clipboard.write(result)
 
     log(
