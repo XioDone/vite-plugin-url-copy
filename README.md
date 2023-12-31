@@ -21,6 +21,10 @@ vite-plugin-url-copy
 
 > [!IMPORTANT]
 > Recommended minimum vite version is v4.
+>
+> Vite CJS Node API deprecated: the CJS build of Vite's Node API is deprecated. See https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
+>
+> We recommend configuring ESM as the default, and we will deprecate the CJS build in v2.
 
 ## Install
 
@@ -29,6 +33,14 @@ pnpm i vite-plugin-url-copy -D
 ```
 
 ## Usage
+
+- Configure ESM as default in `package.json`, it's up to you
+
+```json
+{
+  "type": "module"
+}
+```
 
 - Add plugin to your `vite.config.ts`
 
@@ -46,7 +58,7 @@ export default defineConfig({
 })
 ```
 
-#### QR code is disabled by default and needs to be explicitly enabled
+#### !!! QR code is disabled by default and needs to be explicitly enabled
 
 ```ts
 ServerUrlCopy({
@@ -110,6 +122,10 @@ export default defineConfig({
   },
 })
 ```
+
+## Ending
+
+Hey there! If you enjoy my project, please give me a ⭐️. It means a lot to me! Thank you once again for your support! 😊
 
 ## License
 

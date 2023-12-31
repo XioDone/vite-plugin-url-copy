@@ -5,6 +5,9 @@ import { debugOutput, onCopyWrite, onQRCode, resolveOptions } from './core'
 
 export * from './types'
 
+/**
+ * Read the {@link https://github.com/XioDone/vite-plugin-url-copy | documentation} for more details.
+ */
 export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
   const options = resolveOptions(rawOptions)
 
