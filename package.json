@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-url-copy",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "packageManager": "pnpm@8.13.1",
   "description": "Auto copy the Vite server URL and generate a QR code for easy access during dev or preview",
   "author": "XioDone",
