@@ -3,7 +3,7 @@ vite-plugin-url-copy
 </h1>
 
 <p align="center">
-<a href="https://github.com/XioDone/vite-plugin-url-copy" target="_blank"><img alt="Github Badge" src="https://img.shields.io/badge/Star---?logo=github&logoColor=aliceblue&labelColor=18181B&color=61C200"></a> &nbsp
+<a href="https://github.com/XioDone/vite-plugin-url-copy" target="_blank"><img alt="Github Badge" src="https://img.shields.io/badge/Star---?logo=github&logoColor=aliceblue&labelColor=18181B&color=61C200"></a>
 <a href="https://www.npmjs.com/package/vite-plugin-url-copy" target="_blank"><img src="https://img.shields.io/npm/v/vite-plugin-url-copy.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Version"></a>
 </p>
 
@@ -125,7 +125,7 @@ export default defineConfig({
 
 ## Ending
 
-Hey there! If you enjoy my project, please give me a ⭐️. It means a lot to me! Thank you once again for your support! 😊
+Hey there! If you enjoy my project, please give me a ⭐️. It means a lot to me! Thanks! 😊
 
 ## License
 
