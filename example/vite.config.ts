@@ -10,7 +10,7 @@ export default defineConfig({
         disabled: false,
       },
       qrcode: {
-        custom: '',
+        custom: URL => `${URL}?query=hi`,
         disabled: false,
       },
       disabled: false,
