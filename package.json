@@ -44,7 +44,6 @@
     "release": "bumpp && npm publish",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "postinstall": "npx simple-git-hooks",
     "c": "rm pnpm-lock.yaml package-lock.json & rm -rf node_modules dist example/node_modules"
   },
   "peerDependencies": {

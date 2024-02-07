@@ -24,7 +24,7 @@ vite-plugin-url-copy
 >
 > Vite CJS Node API deprecated: the CJS build of Vite's Node API is deprecated. See https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
 >
-> We recommend configuring ESM as the default, and we will deprecate the CJS build in v2.
+> Recommend configuring ESM as the default, CJS build will be deprecated in v2.
 
 ## Install
 
