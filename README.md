@@ -54,7 +54,7 @@ export default defineConfig({
   },
   preview: {
     host: true,
-  },
+  }
 })
 ```
 
@@ -81,19 +81,24 @@ pnpm preview
 
 ## Configuration
 
+- [Example](./example)
+- Refer to the [type definitions](./src/types.ts) for more options
+
 ```ts
 ServerUrlCopy({
   copy: {
     // 'local' | 'network'
     mode: 'local',
     // Custom string to copy when the server start, It will overwrite the server URL
-    custom: '', // custom: (URL) => ${URL}?query=hi`
+    // custom?: string | ((URL: string) => string)
+    custom: '',
     // Disable Copy
     disabled: false,
   },
   qrcode: {
     // Custom string for the generate network QR code, It will overwrite the server URL
-    custom: '', // custom: (URL) => ${URL}?query=hi`
+    // custom?: string | ((URL: string) => string)
+    custom: '',
     // Disable QRCode
     disabled: true,
   },
@@ -106,7 +111,7 @@ ServerUrlCopy({
 
 Network may need to enable host
 
-```json
+```jsonc
 // package.json
 {
   "scripts": {
