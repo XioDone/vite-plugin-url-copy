@@ -1,5 +1,5 @@
 import type { PreviewServer, ResolvedServerUrls, ViteDevServer } from 'vite'
-import type { Options } from './types'
+import type { Options, ResolveOptions } from './types'
 
 export const log = console.log
 
@@ -49,11 +49,11 @@ export function $promiseState<T>(): usePromiseStateReturn<T> {
   return { promise, ...delegator }
 }
 
-interface Config extends Options {
+interface Config extends ResolveOptions {
   port?: number
 }
 
-let prevConfig: Config = {}
+let prevConfig = {}
 export function $diffConfigChange(config: Config) {
   let hasChange = false
   function diff(curr: any, prev: any): boolean {

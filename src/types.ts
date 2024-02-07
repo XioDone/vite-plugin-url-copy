@@ -11,7 +11,7 @@ interface CopyOptions {
   /**
    * Custom any string.
    */
-  custom?: string | undefined
+  custom?: string | ((URL: string) => string)
 }
 
 interface QRCodeOptions {
@@ -19,7 +19,7 @@ interface QRCodeOptions {
   /**
    * Custom any string.
    */
-  custom?: string
+  custom?: string | ((URL: string) => string)
 }
 
 export interface Options {

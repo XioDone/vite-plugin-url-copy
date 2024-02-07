@@ -3,7 +3,7 @@ import type { Options } from './types'
 import { $catch, $diffConfigChange, getUrls, log } from './utils'
 import { debugOutput, onCopyWrite, onQRCode, resolveOptions } from './core'
 
-export * from './types'
+export type { Options } from './types'
 
 /**
  * Read the {@link https://github.com/XioDone/vite-plugin-url-copy | documentation} for more details.

@@ -22,6 +22,11 @@ export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
     result = custom
   }
 
+  if (typeof custom === 'function') {
+    hasCustom = true
+    result = custom(urls[NETWORK][0])
+  }
+
   result ||= urls[NETWORK][0]
   const computedMode = hasCustom ? 'cutsom' : NETWORK
 

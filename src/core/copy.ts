@@ -21,6 +21,11 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
       result = custom
     }
 
+    if (typeof custom === 'function') {
+      hasCustom = true
+      result = custom(urls[mode][0])
+    }
+
     if (!result) {
       result = urls[mode][0]
     }
