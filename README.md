@@ -84,36 +84,38 @@ pnpm preview
 ```ts
 ServerUrlCopy({
   copy: {
-    // 'local' | 'network', default 'local'
+    // 'local' | 'network'
     mode: 'local',
-    // Custom any string to copy when the server start, It will overwrite the server URL
-    custom: '',
-    // Disable Copy, default false
+    // Custom string to copy when the server start, It will overwrite the server URL
+    custom: '', // custom: (URL) => ${URL}?query=hi`
+    // Disable Copy
     disabled: false,
   },
   qrcode: {
-    // Custom any string for the generate network QR code, It will overwrite the server URL
-    custom: '',
-    // Disable QRCode, default true
+    // Custom string for the generate network QR code, It will overwrite the server URL
+    custom: '', // custom: (URL) => ${URL}?query=hi`
+    // Disable QRCode
     disabled: true,
   },
-  // Disable plugin, default false
+  // Disable plugin
   disabled: false,
-  // Log config info, default false
+  // Log config info
   debug: false,
 })
 ```
 
 Network may need to enable host
 
-```js
+```json
 // package.json
 {
   "scripts": {
     "dev": "vite --host"
   }
 }
+```
 
+```ts
 // or vite.config.ts
 export default defineConfig({
   plugins: [ServerUrlCopy()],
@@ -125,8 +127,8 @@ export default defineConfig({
 
 ## Ending
 
-Hey there! If you enjoy my project, please give me a ⭐️. It means a lot to me! Thanks! 😊
+Hey there! If you enjoy my project, please give me a ⭐️. Thanks!
 
 ## License
 
-[MIT](./LICENSE) License © 2023 [XioDone](https://github.com/XioDone)
+[MIT](./LICENSE) License © 2023-PRESENT [XioDone](https://github.com/XioDone)

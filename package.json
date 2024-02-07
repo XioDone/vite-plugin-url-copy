@@ -19,7 +19,8 @@
     "vite plugin",
     "QR Code",
     "QRCode",
-    "copy server url"
+    "copy server url",
+    "vite-plugin-url-copy"
   ],
   "exports": {
     ".": {
