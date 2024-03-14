@@ -55,8 +55,8 @@
     "uqr": "^0.1.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.0",
-    "@types/node": "^20.11.25",
+    "@antfu/eslint-config": "^2.8.2",
+    "@types/node": "^20.11.27",
     "bumpp": "^9.4.0",
     "eslint": "^8.57.0",
     "lint-staged": "^15.2.2",
@@ -64,7 +64,7 @@
     "tsup": "^8.0.2",
     "typescript": "^5.4.2",
     "unbuild": "^2.0.0",
-    "vite": "^5.1.5"
+    "vite": "^5.1.6"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
