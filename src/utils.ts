@@ -1,5 +1,5 @@
-import type { PreviewServer, ResolvedServerUrls, ViteDevServer } from 'vite'
-import type { Options, ResolveOptions } from './types'
+import type { PreviewServer, ViteDevServer } from 'vite'
+import type { ResolveOptions } from './types'
 
 export const log = console.log
 

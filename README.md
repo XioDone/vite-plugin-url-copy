@@ -94,13 +94,17 @@ ServerUrlCopy({
     custom: '',
     // Disable Copy
     disabled: false,
+    // Custom display color
+    color: 'green',
   },
   qrcode: {
-    // Custom string for the generate network QR code, It will overwrite the server URL
+    // Custom string for the generate QR code, It will overwrite the server URL
     // custom?: string | ((URL: string) => string)
     custom: '',
     // Disable QRCode
     disabled: true,
+    // Custom display color
+    color: 'green',
   },
   // Disable plugin
   disabled: false,
