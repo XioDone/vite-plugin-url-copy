@@ -8,7 +8,7 @@ import type { ResolveOptions } from '../types'
 import { debugPush } from './debug'
 
 export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
-  const { custom, disabled } = options.qrcode
+  const { custom, disabled, color } = options.qrcode
   const debug = options.debug
 
   if (disabled) {
@@ -65,8 +65,8 @@ export const onQRCode = (urls: ResolvedServerUrls, options: ResolveOptions) => {
     qrcodeData = data
   }
 
-  log(colorize('green', '\n  ✔ '), colorize('bgGreen', ` ·QRCode· of the ${NETWORK} - ${result} `), '\n')
-  log(colorize('green', qrcodeData))
+  log(colorize('green', '\n  ✔ '), colorize(color, `·QRCode· of the ${NETWORK} - ${result} `), '\n')
+  log(colorize(color, qrcodeData))
 }
 
 export function generateQRCode(URL: string) {

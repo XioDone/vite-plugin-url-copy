@@ -1,3 +1,5 @@
+import type { ColorName } from 'consola/utils'
+
 type DeepRequired<T> = {
   [P in keyof T]-?: DeepRequired<T[P]>
 }
@@ -12,6 +14,7 @@ interface CopyOptions {
    * Custom any string.
    */
   custom?: string | ((URL: string) => string)
+  color?: ColorName
 }
 
 interface QRCodeOptions {
@@ -20,6 +23,7 @@ interface QRCodeOptions {
    * Custom any string.
    */
   custom?: string | ((URL: string) => string)
+  color?: ColorName
 }
 
 export interface Options {

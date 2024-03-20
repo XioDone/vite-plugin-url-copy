@@ -6,7 +6,7 @@ import { $catch, $sleep, log } from '../utils'
 import { debugPush } from './debug'
 
 export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) => {
-  const { custom, mode, disabled } = options.copy
+  const { custom, mode, disabled, color } = options.copy
   const debug = options.debug
 
   if (disabled) {
@@ -51,7 +51,7 @@ export const onCopyWrite = (urls: ResolvedServerUrls, options: ResolveOptions) =
 
     log(
       colorize('green', '\n  ✔ '),
-      colorize('bgGreen', ` ·${computedMode}· already copied to clipboard - ${result} `),
+      colorize(color, `·${computedMode}· already copied to clipboard - ${result} `),
     )
 
     return result
