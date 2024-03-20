@@ -1,6 +1,8 @@
 import type { Plugin } from 'vite'
+import { colorize } from 'consola/utils'
+import { name, version } from '../package.json'
 import type { Options } from './types'
-import { $catch, $diffConfigChange, getUrls, log } from './utils'
+import { $catch, $diffConfigChange, $sleep, getUrls, log } from './utils'
 import { debugOutput, onCopyWrite, onQRCode, resolveOptions } from './core'
 
 export type { Options } from './types'
@@ -33,6 +35,9 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
             if (isRestart && !hasChange) {
               return
             }
+
+            await $sleep()
+            log(colorize('green', `\n ⚡${name.toLocaleUpperCase()} v${version}`))
             await onCopyWrite(urls, options)
             onQRCode(urls, options)
             debugOutput(options.debug)
@@ -49,6 +54,8 @@ export default function VitePluginServerUrl(rawOptions: Options = {}): Plugin {
 
       server.httpServer.once('listening', () => {
         $catch(async () => {
+          await $sleep()
+          log(colorize('green', `\n ⚡${name.toLocaleUpperCase()} v${version}`))
           const urls = await getUrls(server)
           await onCopyWrite(urls, options)
           onQRCode(urls, options)
