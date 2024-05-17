@@ -2,7 +2,7 @@
   "name": "vite-plugin-url-copy",
   "type": "module",
   "version": "1.1.4",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.1",
   "description": "Auto copy the Vite server URL and generate a QR code for easy access during dev or preview",
   "author": "XioDone",
   "license": "MIT",
@@ -55,8 +55,8 @@
     "uqr": "^0.1.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.16.1",
-    "@types/node": "^20.12.8",
+    "@antfu/eslint-config": "^2.18.0",
+    "@types/node": "^20.12.12",
     "bumpp": "^9.4.1",
     "eslint": "^9.2.0",
     "lint-staged": "^15.2.2",
