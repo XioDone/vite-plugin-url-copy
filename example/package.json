@@ -7,7 +7,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.2.2",
+    "vite": "^5.3.4",
     "vite-plugin-url-copy": "workspace:*"
   }
 }
